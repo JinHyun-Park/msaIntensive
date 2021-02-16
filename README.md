@@ -1,4 +1,5 @@
-# msaIntensive MSA 구성을 위한 내용 정리
+msaIntensive MSA 구성을 위한 내용 정리
+=============================
 
 ## 이론
 1. SAGA 패턴 정리
@@ -8,6 +9,8 @@
 
 ## 환경 구성 세팅 (Mac)
 1. 도커 설치
+    - https://whitepaek.tistory.com/38
+    - 위에 가면 도커 관련 명령어들도 있음
 2. 카프카 설치
     - https://dev-jj.tistory.com/entry/MAC-Kafka-%EB%A7%A5%EC%97%90-Kafka-%EC%84%A4%EC%B9%98-%ED%95%98%EA%B8%B0-Docker-homebrew-Apache
     1. 경로 이동 /Users/jinhyeonbak/intensive/kafka_2.12-2.3.0/bin
@@ -24,6 +27,7 @@
 3. httpie 설치
 4. aws cli 설치
     - https://docs.aws.amazon.com/ko_kr/cli/latest/userguide/install-cliv2-mac.html
+    - aws configure 로 액세스 ID 등 입력
 5. eksctl 설치
     - https://docs.aws.amazon.com/ko_kr/eks/latest/userguide/getting-started-eksctl.html
 6. IAM 생성
