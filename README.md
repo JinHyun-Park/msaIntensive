@@ -32,7 +32,9 @@ msaIntensive MSA 구성을 위한 내용 정리
     - https://docs.aws.amazon.com/ko_kr/eks/latest/userguide/getting-started-eksctl.html
 6. IAM 생성
     - https://www.44bits.io/ko/post/publishing_and_managing_aws_user_access_key
-    
+7. eksctl 생성 ( 시간이 좀 걸림 )
+    - 클러스터 생성 명령어
+        > `eksctl create cluster --name admin-sk-Cluster --version 1.15 --nodegroup-name standard-workers --node-type t3.medium --nodes 3 --nodes-min 3 --nodes-max 3`
 ## Spring 세팅
 [spring.io](start.spring.io)  
 Dependencies : JPA, H2(java embeded DB), data rest(Rest Repositories)
