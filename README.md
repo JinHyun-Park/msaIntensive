@@ -45,3 +45,7 @@ msaIntensive MSA 구성을 위한 내용 정리
 ## Spring 세팅
 [spring.io](start.spring.io)  
 Dependencies : JPA, H2(java embeded DB), data rest(Rest Repositories)
+
+
+# 용어 기타 등
+- hystrix : 원격 시스템이나 호출하는 구간을 격리해 관리, 모니터링 해주는 라이브러리
