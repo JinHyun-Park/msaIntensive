@@ -37,7 +37,11 @@ msaIntensive MSA 구성을 위한 내용 정리
     - 클러스터 생성 명령어
         > `eksctl create cluster --name admin-eks --version 1.17 --nodegroup-name standard-workers --node-type t3.medium --nodes 4 --nodes-min 1 --nodes-max 4`
 8. Local EKS 클러스터 접속정보 설정
-    > `aws eks --region ap-northeast-2 update-kubeconfig --name admin-sk-Cluster`
+    > `aws eks --region ap-northeast-2 update-kubeconfig --name admin-eks`
+9. 아마존 컨테이너 레지스트리
+    - 아마존 > ecr (elastic container registry) > ecr 레파지터리
+        > `aws ecr create-repository --repository-name admin-eks --region ap-northeast-2`
+        > `aws ecr put-image-scanning-configuration --repository-name admin-eks --image-scanning-configuration scanOnPush=true --region ap-northeast-2`
 ## Spring 세팅
 [spring.io](start.spring.io)  
 Dependencies : JPA, H2(java embeded DB), data rest(Rest Repositories)
