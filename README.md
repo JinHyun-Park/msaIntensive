@@ -7,7 +7,7 @@ msaIntensive MSA 구성을 위한 내용 정리
     [https://jjeongil.tistory.com/1100]  
     [https://cla9.tistory.com/22]
 
-## 환경 구성 세팅 (Mac)
+## 환경 구성 세팅 (Mac) --> 아래 참고 사이트에서 더 자세한 기술도 있으니 
 1. 도커 설치
     - https://whitepaek.tistory.com/38
     - 위에 가면 도커 관련 명령어들도 있음
@@ -49,3 +49,6 @@ Dependencies : JPA, H2(java embeded DB), data rest(Rest Repositories)
 
 # 용어 기타 등
 - hystrix : 원격 시스템이나 호출하는 구간을 격리해 관리, 모니터링 해주는 라이브러리
+
+# 참고 사이트
+- https://workflowy.com/s/msa/27a0ioMCzlpV04Ib#/62a296734f02 (각종 설치 및 실행 명령어)
