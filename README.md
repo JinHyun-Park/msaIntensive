@@ -34,7 +34,7 @@ msaIntensive MSA 구성을 위한 내용 정리
 6. IAM 생성
     - https://www.44bits.io/ko/post/publishing_and_managing_aws_user_access_key
 7. eksctl 생성 ( 시간이 좀 걸림 )
-    - 클러스터 생성 명령어
+    - 클러스터 생성
         > `eksctl create cluster --name admin-eks --version 1.17 --nodegroup-name standard-workers --node-type t3.medium --nodes 4 --nodes-min 1 --nodes-max 4`
 8. Local EKS 클러스터 접속정보 설정
     > `aws eks --region ap-northeast-2 update-kubeconfig --name admin-eks`
