@@ -17,7 +17,7 @@ msaIntensive MSA 구성을 위한 내용 정리
     2. 주키퍼 실행  
      ./zookeeper-server-start.sh ../config/zookeeper.properties &
     3. 카프카 broker 실행  
-     ./zookeeper-server-start.sh ../config/server.properties &
+     ./kafka-server-start.sh ../config/server.properties
     4. 카프카 topic 만들기  
      ./kafka-topic.sh --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topic booking
     5. 카프카 producer 실행  
@@ -34,7 +34,9 @@ msaIntensive MSA 구성을 위한 내용 정리
     - https://www.44bits.io/ko/post/publishing_and_managing_aws_user_access_key
 7. eksctl 생성 ( 시간이 좀 걸림 )
     - 클러스터 생성 명령어
-        > `eksctl create cluster --name admin-sk-Cluster --version 1.15 --nodegroup-name standard-workers --node-type t3.medium --nodes 3 --nodes-min 3 --nodes-max 3`
+        > `eksctl create cluster --name admin-eks --version 1.17 --nodegroup-name standard-workers --node-type t3.medium --nodes 4 --nodes-min 1 --nodes-max 4`
+8. Local EKS 클러스터 접속정보 설정
+    > `aws eks --region ap-northeast-2 update-kubeconfig --name admin-sk-Cluster`
 ## Spring 세팅
 [spring.io](start.spring.io)  
 Dependencies : JPA, H2(java embeded DB), data rest(Rest Repositories)
