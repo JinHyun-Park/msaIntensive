@@ -18,12 +18,13 @@ msaIntensive MSA 구성을 위한 내용 정리
      ./zookeeper-server-start.sh ../config/zookeeper.properties &
     3. 카프카 broker 실행  
      ./kafka-server-start.sh ../config/server.properties
+    ( 4 ~ 5 는 건너뛰어도 됨 )
     4. 카프카 topic 만들기  
-     ./kafka-topic.sh --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topic booking
+     ./kafka-topic.sh --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topic teamtwohotel
     5. 카프카 producer 실행  
-     ./kafka-console-poducer.sh --broker-list localhost:9092 --topic booking
+     ./kafka-console-poducer.sh --broker-list localhost:9092 --topic teamtwohotel
     6. 카프카 consumer 실행  
-     ./kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic booking --from-beginning
+     ./kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic teamtwohotel --from-beginning
 3. httpie 설치
 4. aws cli 설치
     - https://docs.aws.amazon.com/ko_kr/cli/latest/userguide/install-cliv2-mac.html
