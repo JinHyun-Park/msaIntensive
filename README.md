@@ -7,7 +7,7 @@ msaIntensive MSA 구성을 위한 내용 정리
     [https://jjeongil.tistory.com/1100]  
     [https://cla9.tistory.com/22]
 
-## 환경 구성 세팅 (Mac) --> 아래 참고 사이트에서 더 자세한 기술도 있으니 
+## 환경 구성 세팅 (Mac) --> 아래 참고 사이트에서 더 자세한 기술도 있으니 참고
 1. 도커 설치
     - https://whitepaek.tistory.com/38
     - 위에 가면 도커 관련 명령어들도 있음
