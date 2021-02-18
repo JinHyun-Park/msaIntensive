@@ -13,6 +13,7 @@ msaIntensive MSA 구성을 위한 내용 정리
     - 위에 가면 도커 관련 명령어들도 있음
 2. 카프카 설치
     - https://dev-jj.tistory.com/entry/MAC-Kafka-%EB%A7%A5%EC%97%90-Kafka-%EC%84%A4%EC%B9%98-%ED%95%98%EA%B8%B0-Docker-homebrew-Apache
+    - https://jdm.kr/blog/208
     1. 경로 이동 /Users/jinhyeonbak/intensive/kafka_2.12-2.3.0/bin
     2. 주키퍼 실행  
      ./zookeeper-server-start.sh ../config/zookeeper.properties &
@@ -52,10 +53,12 @@ msaIntensive MSA 구성을 위한 내용 정리
   
   
 ## 도커 빌드 및 푸시
+먼저 mvn package 로 jar 파일을 만들어줘야 함!!
 1. 도커 빌드 // 위의 리포지토리 주소 앞에 docker build -t 를 붙이고 뒤에 :v1 . 을 붙여서 각 프로젝트(로컬) 디렉토리에서 실행 
     - docker build -t (ID).dkr.ecr.ap-northeast-2.amazonaws.com/adminxx-game-gateway:v1 .
 2. 도커 푸시
     - docker push 690521455231.dkr.ecr.ap-northeast-2.amazonaws.com/admin-customer:v1
+    - 오류가 발생한다면 aws ecr get-login-password 가 잘됐는 지 확인
 
 ## Spring 세팅
 [spring.io](start.spring.io)  
