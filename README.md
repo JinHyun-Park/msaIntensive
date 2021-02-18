@@ -60,6 +60,35 @@ msaIntensive MSA 구성을 위한 내용 정리
     - docker push 690521455231.dkr.ecr.ap-northeast-2.amazonaws.com/admin-customer:v1
     - 오류가 발생한다면 aws ecr get-login-password 가 잘됐는 지 확인
 
+## EKS에 카프카 설치
+    > helm 사전에 설치해야함
+    > `kubectl --namespace kube-system create sa tiller      # helm 의 설치관리자를 위한 시스템 사용자 생성`
+    > `kubectl create clusterrolebinding tiller --clusterrole cluster-admin --serviceaccount=kube-system:tiller`
+    > `helm repo add incubator https://charts.helm.sh/incubator`
+    > `helm repo update`
+    > `kubectl create ns kafka`
+    > `helm install my-kafka --namespace kafka incubator/kafka`
+  
+  - 카프카 설치 확인
+    > kubectl get all -n kafka
+  - 카프카 토픽 생성
+    > kubectl -n kafka exec my-kafka-0 -- /usr/bin/kafka-topics --zookeeper my-kafka-zookeeper:2181 --topic game --create --partitions 1 --replication-factor 1
+  - 토픽 확인
+    > kubectl -n kafka exec my-kafka-0 -- /usr/bin/kafka-topics --zookeeper my-kafka-zookeeper:2181 --list
+  - 이벤트 발행하기 (producer, 딱히 필요없음)
+    > kubectl -n kafka exec -ti my-kafka-0 -- /usr/bin/kafka-console-producer --broker-list my-kafka:9092 --topic teamtwohotel
+  - 이벤트 수신하기
+    > kubectl -n kafka exec -ti my-kafka-0 -- /usr/bin/kafka-console-consumer --bootstrap-server my-kafka:9092 --topic teamtwohotel --from-beginning
+
+## 컨테이너 만들기
+  - Containerizing
+    > namespace 만들기 
+      - `kubectl create namespace teamtwohotel`
+    > kubectl create deploy order --image=496278789073.dkr.ecr.ap-northeast-1.amazonaws.com/skcc07-order:v1 -n tutorial  (각 이미지별로 다 해줘야함)
+    > kubectl expose deploy order --type=ClusterIP --port=8080 -n tutorial   (상동)
+    > kubectl expose deploy gateway --type=LoadBalancer --port=8080 -n teamtwohotel    ( gateway는 이렇게 해줘야댐 )
+    > kubectl get all -n teamtwohotel
+
 ## Spring 세팅
 [spring.io](start.spring.io)  
 Dependencies : JPA, H2(java embeded DB), data rest(Rest Repositories)
