@@ -39,11 +39,23 @@ msaIntensive MSA 구성을 위한 내용 정리
 8. Local EKS 클러스터 토큰가져오기
     > `aws eks --region ap-northeast-2 update-kubeconfig --name admin-eks`
 9. 아마존 컨테이너 레지스트리
-    - 아마존 > ecr (elastic container registry) > ecr 레파지터리
-        > `aws ecr create-repository --repository-name admin-eks --region ap-northeast-2`
+    - 아마존 > ecr (elastic container registry) > ecr 레파지터리     : ECR은 각 배포될 이미지 대상과 이름을 맞춰준다
+        > `aws ecr create-repository --repository-name admin-eks --region ap-northeast-2`  
         > `aws ecr put-image-scanning-configuration --repository-name admin-eks --image-scanning-configuration scanOnPush=true --region ap-northeast-2`
 10. AWS 컨테이너 레지스트리 로그인
     - aws ecr get-login-password --region (Region-Code) | docker login --username AWS --password-stdin (Account-Id).dkr.ecr.(Region-Code).amazonaws.com
+  
+  
+11. AWS 레지스트리에 도커 이미지 푸시하기  (이건 위에서 한 거랑 좀 겹치는듯)
+    - aws ecr create-repository --repository-name (IMAGE_NAME) --region ap-northeast-2
+    - docker push (Account-Id).dkr.ecr.ap-northeast-2.amazonaws.com/(IMAGE_NAME):latest
+  
+  
+## 도커 빌드 및 푸시
+1. 도커 빌드 // 위의 리포지토리 주소 앞에 docker build -t 를 붙이고 뒤에 :v1 . 을 붙여서 각 프로젝트(로컬) 디렉토리에서 실행 
+    - docker build -t (ID).dkr.ecr.ap-northeast-2.amazonaws.com/adminxx-game-gateway:v1 .
+2. 도커 푸시
+    - docker push 690521455231.dkr.ecr.ap-northeast-2.amazonaws.com/admin-customer:v1
 
 ## Spring 세팅
 [spring.io](start.spring.io)  
