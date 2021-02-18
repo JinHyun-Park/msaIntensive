@@ -36,12 +36,15 @@ msaIntensive MSA 구성을 위한 내용 정리
 7. eksctl 생성 ( 시간이 좀 걸림 )
     - 클러스터 생성
         > `eksctl create cluster --name admin-eks --version 1.17 --nodegroup-name standard-workers --node-type t3.medium --nodes 4 --nodes-min 1 --nodes-max 4`
-8. Local EKS 클러스터 접속정보 설정
+8. Local EKS 클러스터 토큰가져오기
     > `aws eks --region ap-northeast-2 update-kubeconfig --name admin-eks`
 9. 아마존 컨테이너 레지스트리
     - 아마존 > ecr (elastic container registry) > ecr 레파지터리
         > `aws ecr create-repository --repository-name admin-eks --region ap-northeast-2`
         > `aws ecr put-image-scanning-configuration --repository-name admin-eks --image-scanning-configuration scanOnPush=true --region ap-northeast-2`
+10. AWS 컨테이너 레지스트리 로그인
+    - aws ecr get-login-password --region (Region-Code) | docker login --username AWS --password-stdin (Account-Id).dkr.ecr.(Region-Code).amazonaws.com
+
 ## Spring 세팅
 [spring.io](start.spring.io)  
 Dependencies : JPA, H2(java embeded DB), data rest(Rest Repositories)
