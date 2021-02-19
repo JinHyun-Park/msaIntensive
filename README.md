@@ -43,7 +43,7 @@ msaIntensive MSA 구성을 위한 내용 정리
     - https://www.44bits.io/ko/post/publishing_and_managing_aws_user_access_key
 7. eksctl 생성 ( 시간이 좀 걸림 )
     - 클러스터 생성
-        > `eksctl create cluster --name admin-eks --version 1.17 --nodegroup-name standard-workers --node-type t3.medium --nodes 4 --nodes-min 1 --nodes-max 4`
+        > `eksctl create cluster --name admin-eks --version 1.17 --nodegroup-name standard-workers --node-type t3.micro --nodes 4 --nodes-min 1 --nodes-max 4`
 8. Local EKS 클러스터 토큰가져오기
     > `aws eks --region ap-northeast-2 update-kubeconfig --name admin-eks`
 9. 아마존 컨테이너 레지스트리
@@ -96,7 +96,16 @@ msaIntensive MSA 구성을 위한 내용 정리
     > kubectl expose deploy gateway --type=LoadBalancer --port=8080 -n teamtwohotel    ( gateway는 이렇게 해줘야댐 )
     > kubectl get all -n teamtwohotel
 
-## Spring 세팅
+## CI/CD
+- 환병변수 준비
+  > AWS_ACCOUNT_ID
+  > KUBE URL : EKS -> 클러스터 -> 구성 "세부정보"의 "API 엔드포인트 URL"
+  > KUBE TOKEN 가져오기
+    : kubectl -n kube-system describe secret $(kubectl -n kube-system get secret | grep [클러스터이름] | awk '{print $1}')
+
+
+
+## Spring 세팅 ( 소스 내려받아서 하는 경우 안해도 됨 )
 [spring.io](start.spring.io)  
 Dependencies : JPA, H2(java embeded DB), data rest(Rest Repositories)
 
