@@ -102,7 +102,16 @@ msaIntensive MSA 구성을 위한 내용 정리
   > KUBE URL : EKS -> 클러스터 -> 구성 "세부정보"의 "API 엔드포인트 URL"
   > KUBE TOKEN 가져오기
     : kubectl -n kube-system describe secret $(kubectl -n kube-system get secret | grep [클러스터이름] | awk '{print $1}')
-
+    
+  > Code build와 ECR 연결 정책 설정
+    : code build -> 빌드 프로젝트 생성
+    ![codebuild1](https://user-images.githubusercontent.com/17754849/108522319-0e35a600-7310-11eb-8d63-f32cf0651e0a.png)  
+    ![codebuild2](https://user-images.githubusercontent.com/17754849/108524004-ed6e5000-7311-11eb-831d-e6fca77ab59e.png)  
+    ![codebuild3](https://user-images.githubusercontent.com/17754849/108524571-843b0c80-7312-11eb-968a-9d14b182afb8.png)  
+    그 뒤는 다음의 url로 설명 대체 https://jootc.com/p/201905122828  
+    그리고 다시 뒷 내용은 "3. CICD-Pipeline_AWS_v2" pdf 자료 39페이지부터 (이미지가 많은 관계로, buildspec.yml은 복사하기)
+  > > 환경 변수 (아직 정상 동작 안해서 맞는 지는 모름)
+      ![env](https://user-images.githubusercontent.com/17754849/108544309-a1c7a080-7329-11eb-9e2f-702697073c45.png)
 
 
 ## Spring 세팅 ( 소스 내려받아서 하는 경우 안해도 됨 )
