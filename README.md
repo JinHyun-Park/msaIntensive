@@ -26,6 +26,13 @@ msaIntensive MSA 구성을 위한 내용 정리
      ./kafka-console-poducer.sh --broker-list localhost:9092 --topic teamtwohotel
     6. 카프카 consumer 실행  
      ./kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic teamtwohotel --from-beginning
+    7. 카프카 토픽 삭제
+     ./kafka-topics.sh --zookeeper localhost:2181 --delete --topic DummyTopic
+    8. 카프카 토픽 리스트
+     ./kafka-topics.sh --list --zookeeper localhost:2181
+    9. 카프카가 비정상일 때 
+     sudo lsof -i :2181 한뒤  
+     kill -9 pid 하고 다시 띄워준다
 3. httpie 설치
 4. aws cli 설치
     - https://docs.aws.amazon.com/ko_kr/cli/latest/userguide/install-cliv2-mac.html
@@ -85,7 +92,7 @@ msaIntensive MSA 구성을 위한 내용 정리
     > namespace 만들기 
       - `kubectl create namespace teamtwohotel`
     > kubectl create deploy order --image=496278789073.dkr.ecr.ap-northeast-1.amazonaws.com/skcc07-order:v1 -n tutorial  (각 이미지별로 다 해줘야함)
-    > kubectl expose deploy order --type=ClusterIP --port=8080 -n tutorial   (상동)
+    > kubectl expose deploy order --type=ClusterIP --port=8080 -n tutorial   (상동, port는 모두 8080으로 띄워줘야함!!)
     > kubectl expose deploy gateway --type=LoadBalancer --port=8080 -n teamtwohotel    ( gateway는 이렇게 해줘야댐 )
     > kubectl get all -n teamtwohotel
 
@@ -99,3 +106,7 @@ Dependencies : JPA, H2(java embeded DB), data rest(Rest Repositories)
 
 # 참고 사이트
 - https://workflowy.com/s/msa/27a0ioMCzlpV04Ib#/62a296734f02 (각종 설치 및 실행 명령어)
+
+# kubectl 명령어
+- kubectl delete deploy gateway -n teamtwohotel
+- kubectl delete service gateway -n teamtwohotel
