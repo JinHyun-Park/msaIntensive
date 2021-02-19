@@ -110,3 +110,5 @@ Dependencies : JPA, H2(java embeded DB), data rest(Rest Repositories)
 # kubectl 명령어
 - kubectl delete deploy gateway -n teamtwohotel
 - kubectl delete service gateway -n teamtwohotel
+- kubectl exec -it -n teamtwohotel gateway-77c6dd9f89-wkzm5 -- /bin/sh
+- kubectl config set-context --current --namespace=teamtwohotel   (네임 스페이스 저장)
