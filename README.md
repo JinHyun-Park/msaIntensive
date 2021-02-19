@@ -112,6 +112,8 @@ msaIntensive MSA 구성을 위한 내용 정리
     그리고 다시 뒷 내용은 "3. CICD-Pipeline_AWS_v2" pdf 자료 39페이지부터 (이미지가 많은 관계로, buildspec.yml은 복사하기)
   > > 환경 변수 (아직 정상 동작 안해서 맞는 지는 모름)
       ![env](https://user-images.githubusercontent.com/17754849/108544309-a1c7a080-7329-11eb-9e2f-702697073c45.png)
+      
+  > Codebuild cache 적용 : CICD PDF p.45
 
 
 ## Spring 세팅 ( 소스 내려받아서 하는 경우 안해도 됨 )
