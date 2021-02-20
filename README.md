@@ -100,7 +100,7 @@ msaIntensive MSA 구성을 위한 내용 정리
 - 환병변수 준비
   > AWS_ACCOUNT_ID
   > KUBE URL : EKS -> 클러스터 -> 구성 "세부정보"의 "API 엔드포인트 URL"
-  > KUBE TOKEN 가져오기
+  > KUBE TOKEN 가져오기  
     : kubectl -n kube-system describe secret $(kubectl -n kube-system get secret | grep [클러스터이름] | awk '{print $1}')
     
   > Code build와 ECR 연결 정책 설정
@@ -110,8 +110,10 @@ msaIntensive MSA 구성을 위한 내용 정리
     ![codebuild3](https://user-images.githubusercontent.com/17754849/108524571-843b0c80-7312-11eb-968a-9d14b182afb8.png)  
     그 뒤는 다음의 url로 설명 대체 https://jootc.com/p/201905122828  
     그리고 다시 뒷 내용은 "3. CICD-Pipeline_AWS_v2" pdf 자료 39페이지부터 (이미지가 많은 관계로, buildspec.yml은 복사하기)
-  > > 환경 변수 (아직 정상 동작 안해서 맞는 지는 모름)
+  >  > 환경 변수 (아직 정상 동작 안해서 맞는 지는 모름)
       ![env](https://user-images.githubusercontent.com/17754849/108544309-a1c7a080-7329-11eb-9e2f-702697073c45.png)
+  > 아마 위 내용만 하고 진행하면 AccessDeniedException 발생할텐데 role 추가해줘야함  
+  >  > [여기 참고](https://www.evernote.com/shard/s97/client/snv?noteGuid=d91f6cc3-1048-42a4-af48-c7287eeb50d3&noteKey=1636dabd120513970300900cd5956626&sn=https%3A%2F%2Fwww.evernote.com%2Fshard%2Fs97%2Fsh%2Fd91f6cc3-1048-42a4-af48-c7287eeb50d3%2F1636dabd120513970300900cd5956626&title=CNA-TEST%2B%25EA%25B0%259C%25EB%25B0%259C%25ED%2599%2598%25EA%25B2%25BD%2B%25EC%2584%25A4%25EC%25A0%2595%2B%25231.%2B%25EA%25B0%259C%25EC%259D%25B8%25EA%25B3%25BC%25EC%25A0%259C_AWS%2B%25EC%2584%25A4%25EC%25A0%2595_%2528%25EC%25A0%2584%25EC%25B2%25B4%25EB%25B2%2584%25EC%25A0%2584%2529%2B%25EC%2582%25AC%25EB%25B3%25B8)
       
   > Codebuild cache 적용 : CICD PDF p.45
 
