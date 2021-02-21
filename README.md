@@ -180,6 +180,56 @@ kubectl -n kube-system describe secret $(kubectl -n kube-system get secret | gre
 
 
 # 서비스 메시 - istio, 키알리, 예거, siege
+> istio
+> `curl -L https://istio.io/downloadIstio | ISTIO_VERSION=1.7.1 TARGET_ARCH=x86_64 sh -`  
+> `cd istio-1.7.1`  
+> `export PATH=$PWD/bin:$PATH`  
+> `istioctl install --set profile=demo`  
+> 설치 확인 `kubectl get all -n istio-system`
+> istio injection
+>  > ~~`kubectl label ns teamtwohotel istio-injection=enabled`~~ (굳이 안해도 최신버전은 잡힘)
+>  > kubectl label ns default istio-injection- (잘못 설정 시 삭제 방법)
+> istio 모니터링 툴 설치
+>  > kubectl apply -f samples/addons
+>  > 모니터링 툴 설정
+>  >  > Monitoring Server - Kiali
+>  >  >  > 기본 ServiceType 변경 : ClusterIP를 LoadBalancer 로
+>  >  >  >  > `kubectl edit svc kiali -n istio-system`
+>  >  >  >  > `:%s/ClusterIP/LoadBalancer/g`
+>  >  >  >  > `:wq!`
+>  >  >  > 모니터링 시스템(kiali) 접속 : EXTERNAL-IP:20001 (admin/admin)
+>  >  > Tracing Server - Jaeger
+>  >  >  > 기본 ServiceType 변경 : ClusterIP를 LoadBalancer 로
+>  >  >  >  > `kubectl edit svc tracing -n istio-system`
+>  >  >  >  > `:%s/ClusterIP/LoadBalancer/g`
+>  >  >  >  > `:wq!`
+>  >  >  > 분산추적 시스템(tracing) 접속 : EXTERNAL-IP:80
+
+# httpie, siege 툴 설치 (kube에 설치하는거)
+1. httpie 설치
+```
+cat <<EOF | kubectl apply -f -
+apiVersion: "v1"
+kind: "Pod"
+metadata: 
+  name: httpie
+  namespace: tutorial
+  labels: 
+    name: httpie
+spec: 
+  containers: 
+    - name: httpie
+      image: clue/httpie
+      command:
+        - sleep
+        - "360000"
+EOF
+```
+  > kubectl exec -it httpie bin/bash   
+
+2. seige 설치 (로컬)
+  > Mac : `brew install siege`
+  > Window : `https://trend21c.tistory.com/1438`
 
 
 
