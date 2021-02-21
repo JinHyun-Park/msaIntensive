@@ -167,7 +167,7 @@ kubectl -n kube-system describe secret $(kubectl -n kube-system get secret | gre
     그리고 다시 뒷 내용은 "3. CICD-Pipeline_AWS_v2" pdf 자료 39페이지부터 (이미지가 많은 관계로, buildspec.yml은 복사하기)
   >  > 환경 변수 (아직 정상 동작 안해서 맞는 지는 모름)
       ![env](https://user-images.githubusercontent.com/17754849/108544309-a1c7a080-7329-11eb-9e2f-702697073c45.png)
-  > <pre> \_\_아마 위 내용만 하고 진행하면 AccessDeniedException 발생할텐데 role 추가해줘야함\_\_
+  > \\_\\_아마 위 내용만 하고 진행하면 AccessDeniedException 발생할텐데 role 추가해줘야함\\_\\_
   ```
   { "Action": [
         "ecr:BatchCheckLayerAvailability",
@@ -198,25 +198,25 @@ kubectl -n kube-system describe secret $(kubectl -n kube-system get secret | gre
 > `cd istio-1.7.1`  
 > `export PATH=$PWD/bin:$PATH`  
 > `istioctl install --set profile=demo`  
-> 설치 확인 `kubectl get all -n istio-system`
-> istio injection
->  > ~~`kubectl label ns teamtwohotel istio-injection=enabled`~~ (굳이 안해도 최신버전은 잡힘)
->  > kubectl label ns default istio-injection- (잘못 설정 시 삭제 방법)
-> istio 모니터링 툴 설치
->  > kubectl apply -f samples/addons
->  > 모니터링 툴 설정
->  >  > Monitoring Server - Kiali
->  >  >  > 기본 ServiceType 변경 : ClusterIP를 LoadBalancer 로
->  >  >  >  > `kubectl edit svc kiali -n istio-system`
->  >  >  >  > `:%s/ClusterIP/LoadBalancer/g`
->  >  >  >  > `:wq!`
->  >  >  > 모니터링 시스템(kiali) 접속 : EXTERNAL-IP:20001 (admin/admin)
->  >  > Tracing Server - Jaeger
->  >  >  > 기본 ServiceType 변경 : ClusterIP를 LoadBalancer 로
->  >  >  >  > `kubectl edit svc tracing -n istio-system`
->  >  >  >  > `:%s/ClusterIP/LoadBalancer/g`
->  >  >  >  > `:wq!`
->  >  >  > 분산추적 시스템(tracing) 접속 : EXTERNAL-IP:80
+> 설치 확인 `kubectl get all -n istio-system`  
+> istio injection  
+>  > ~~`kubectl label ns teamtwohotel istio-injection=enabled`~~ (굳이 안해도 최신버전은 잡힘)  
+>  > kubectl label ns default istio-injection- (잘못 설정 시 삭제 방법)  
+> istio 모니터링 툴 설치  
+>  > kubectl apply -f samples/addons  
+>  > 모니터링 툴 설정  
+>  >  > Monitoring Server - Kiali  
+>  >  >  > 기본 ServiceType 변경 : ClusterIP를 LoadBalancer 로  
+>  >  >  >  > `kubectl edit svc kiali -n istio-system`  
+>  >  >  >  > `:%s/ClusterIP/LoadBalancer/g`  
+>  >  >  >  > `:wq!`  
+>  >  >  > 모니터링 시스템(kiali) 접속 : EXTERNAL-IP:20001 (admin/admin)  
+>  >  > Tracing Server - Jaeger  
+>  >  >  > 기본 ServiceType 변경 : ClusterIP를 LoadBalancer 로  
+>  >  >  >  > `kubectl edit svc tracing -n istio-system`  
+>  >  >  >  > `:%s/ClusterIP/LoadBalancer/g`  
+>  >  >  >  > `:wq!`  
+>  >  >  > 분산추적 시스템(tracing) 접속 : EXTERNAL-IP:80  
 
 # httpie, siege 툴 설치 (kube에 설치하는거)
 1. httpie 설치
