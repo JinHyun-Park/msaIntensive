@@ -152,7 +152,7 @@ EOF
 
 
 만들어진 eks-admin SA 의 토큰 가져오기
-kubectl -n kube-system describe secret $(kubectl -n kube-system get secret | grep [클러스터이름] | awk '{print $1}')
+kubectl -n kube-system describe secret $(kubectl -n kube-system get secret | grep eks-admin | awk '{print $1}')
 ```
 
   > KUBE TOKEN 가져오기  
@@ -173,6 +173,14 @@ kubectl -n kube-system describe secret $(kubectl -n kube-system get secret | gre
   > Codebuild cache 적용 : CICD PDF p.45, S3 만들고 설정해야 함  
   > ~~buildspec.yml에 `aws eks --region $AWS_DEFAULT_REGION update-kubeconfig --name $_EKS` 이거 넣어줘야 하는데 권한 에러 날 경우~~
   >  > ~~https://stackoverflow.com/questions/56011492/accessdeniedexception-creating-eks-cluster-user-is-not-authorized-to-perform~~
+  > 상세 내용은 buildspec.yml과 코브빌드의 환경변수 확인하면 됨
+
+
+# AutoScale
+
+
+# 서비스 메시 - istio, 키알리, 예거, siege
+
 
 
 ## Spring 세팅 ( 소스 내려받아서 하는 경우 안해도 됨 )
