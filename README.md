@@ -44,7 +44,7 @@ msaIntensive MSA 구성을 위한 내용 정리
 7. eksctl 생성 ( 시간이 좀 걸림 )
     - 클러스터 생성
         > `eksctl create cluster --name admin-eks --version 1.17 --nodegroup-name standard-workers --node-type t3.micro --nodes 4 --nodes-min 1 --nodes-max 4`
-8. Local EKS 클러스터 토큰가져오기
+8. Local EKS 클러스터 토큰가져오기 ( CI/CD 할때 필요한건데, 앞에 설정해줘야 할 게 더 있으니 아래 쪽 CI/CD 다시 참고 )
     > `aws eks --region ap-northeast-2 update-kubeconfig --name admin-eks`
 9. 아마존 컨테이너 레지스트리
     - 아마존 > ecr (elastic container registry) > ecr 레파지터리     : ECR은 각 배포될 이미지 대상과 이름을 맞춰준다
@@ -100,8 +100,60 @@ msaIntensive MSA 구성을 위한 내용 정리
 - 환병변수 준비
   > AWS_ACCOUNT_ID
   > KUBE URL : EKS -> 클러스터 -> 구성 "세부정보"의 "API 엔드포인트 URL"
+  > CodeBuild 와 EKS 연결
+```
+1. eks-admin-service-account.yaml 파일 생성하여 sa 생성
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: eks-admin
+  namespace: kube-system
+2. kubectl apply -f eks-admin-service-account.yaml
+혹은, 바로 적용도 가능함
+cat <<EOF | kubectl apply -f -
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: eks-admin
+  namespace: kube-system
+EOF
+3. eks-admin-cluster-role-binding.yaml 파일 생성하여 롤바인딩
+apiVersion: rbac.authorization.k8s.io/v1beta1
+kind: ClusterRoleBinding
+metadata:
+  name: eks-admin
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: cluster-admin
+subjects:
+- kind: ServiceAccount
+  name: eks-admin
+  namespace: kube-system
+4. kubectl apply -f eks-admin-cluster-role-binding.yaml
+혹은, 바로 적용도 가능함
+cat <<EOF | kubectl apply -f -
+apiVersion: rbac.authorization.k8s.io/v1beta1
+kind: ClusterRoleBinding
+metadata:
+  name: eks-admin
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: cluster-admin
+subjects:
+- kind: ServiceAccount
+  name: eks-admin
+  namespace: kube-system
+EOF
+
+
+만들어진 eks-admin SA 의 토큰 가져오기
+kubectl -n kube-system describe secret $(kubectl -n kube-system get secret | grep [클러스터이름] | awk '{print $1}')
+```
+
   > KUBE TOKEN 가져오기  
-    : kubectl -n kube-system describe secret $(kubectl -n kube-system get secret | grep [클러스터이름] | awk '{print $1}')
+    : 
     
   > Code build와 ECR 연결 정책 설정
     : code build -> 빌드 프로젝트 생성
@@ -115,7 +167,9 @@ msaIntensive MSA 구성을 위한 내용 정리
   > 아마 위 내용만 하고 진행하면 AccessDeniedException 발생할텐데 role 추가해줘야함  
   >  > [여기 참고](https://www.evernote.com/shard/s97/client/snv?noteGuid=d91f6cc3-1048-42a4-af48-c7287eeb50d3&noteKey=1636dabd120513970300900cd5956626&sn=https%3A%2F%2Fwww.evernote.com%2Fshard%2Fs97%2Fsh%2Fd91f6cc3-1048-42a4-af48-c7287eeb50d3%2F1636dabd120513970300900cd5956626&title=CNA-TEST%2B%25EA%25B0%259C%25EB%25B0%259C%25ED%2599%2598%25EA%25B2%25BD%2B%25EC%2584%25A4%25EC%25A0%2595%2B%25231.%2B%25EA%25B0%259C%25EC%259D%25B8%25EA%25B3%25BC%25EC%25A0%259C_AWS%2B%25EC%2584%25A4%25EC%25A0%2595_%2528%25EC%25A0%2584%25EC%25B2%25B4%25EB%25B2%2584%25EC%25A0%2584%2529%2B%25EC%2582%25AC%25EB%25B3%25B8)
       
-  > Codebuild cache 적용 : CICD PDF p.45
+  > Codebuild cache 적용 : CICD PDF p.45, S3 만들고 설정해야 함  
+  > ~~buildspec.yml에 `aws eks --region $AWS_DEFAULT_REGION update-kubeconfig --name $_EKS` 이거 넣어줘야 하는데 권한 에러 날 경우~~
+  >  > ~~https://stackoverflow.com/questions/56011492/accessdeniedexception-creating-eks-cluster-user-is-not-authorized-to-perform~~
 
 
 ## Spring 세팅 ( 소스 내려받아서 하는 경우 안해도 됨 )
