@@ -90,11 +90,11 @@ msaIntensive MSA 구성을 위한 내용 정리
 ## 컨테이너 만들기
   - Containerizing
     > namespace 만들기 
-      - `kubectl create namespace teamtwohotel`
-    > kubectl create deploy order --image=496278789073.dkr.ecr.ap-northeast-1.amazonaws.com/skcc07-order:v1 -n tutorial  (각 이미지별로 다 해줘야함)
-    > kubectl expose deploy order --type=ClusterIP --port=8080 -n tutorial   (상동, port는 모두 8080으로 띄워줘야함!!)
-    > kubectl expose deploy gateway --type=LoadBalancer --port=8080 -n teamtwohotel    ( gateway는 이렇게 해줘야댐 )
-    > kubectl get all -n teamtwohotel
+      - `kubectl create namespace teamtwohotel`  
+    > kubectl create deploy order --image=496278789073.dkr.ecr.ap-northeast-1.amazonaws.com/skcc07-order:v1 -n tutorial  (각 이미지별로 다 해줘야함)  
+    > kubectl expose deploy order --type=ClusterIP --port=8080 -n tutorial   (상동, port는 모두 8080으로 띄워줘야함!!)  
+    > kubectl expose deploy gateway --type=LoadBalancer --port=8080 -n teamtwohotel    ( gateway는 이렇게 해줘야댐 )  
+    > kubectl get all -n teamtwohotel  
 
 ## CI/CD
 - 환병변수 준비
@@ -108,6 +108,7 @@ kind: ServiceAccount
 metadata:
   name: eks-admin
   namespace: kube-system
+  
 2. kubectl apply -f eks-admin-service-account.yaml
 혹은, 바로 적용도 가능함
 cat <<EOF | kubectl apply -f -
@@ -117,6 +118,7 @@ metadata:
   name: eks-admin
   namespace: kube-system
 EOF
+
 3. eks-admin-cluster-role-binding.yaml 파일 생성하여 롤바인딩
 apiVersion: rbac.authorization.k8s.io/v1beta1
 kind: ClusterRoleBinding
@@ -130,6 +132,7 @@ subjects:
 - kind: ServiceAccount
   name: eks-admin
   namespace: kube-system
+  
 4. kubectl apply -f eks-admin-cluster-role-binding.yaml
 혹은, 바로 적용도 가능함
 cat <<EOF | kubectl apply -f -
