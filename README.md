@@ -245,6 +245,26 @@ EOF
   > Window : `https://trend21c.tistory.com/1438`
 
 
+# Configmap  (4.Container_Orchestration(Docker & Kubernetes)_AWS_v2 2.pdf p.139)
+- configmap 생성  
+  > kubectl create configmap my-config --from-literal=key1=value1 --from-literal=key2=value2
+- configmap 정보 가져오기  
+  > kubectl get configmaps my-config -o yaml  
+
+- 파일로부터 configmap 생성 (configmap.yml 생성)
+```
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: customer1
+data:
+  TEXT1: Customer1_Company
+  TEXT2: Welcomes You
+  COMPANY: Customer1 Company Technology Pct. Ltd.
+```
+ > kubectl create -f configmap.yml
+- ![configmap](https://user-images.githubusercontent.com/17754849/108792601-fd618a80-75c4-11eb-9386-3d8785979309.png)
+
 
 ## Spring 세팅 ( 소스 내려받아서 하는 경우 안해도 됨 )
 [spring.io](start.spring.io)  
