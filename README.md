@@ -262,9 +262,24 @@ data:
   TEXT2: Welcomes You
   COMPANY: Customer1 Company Technology Pct. Ltd.
 ```
- > kubectl create -f configmap.yml
+  > kubectl create -f configmap.yml
 - ![configmap](https://user-images.githubusercontent.com/17754849/108792601-fd618a80-75c4-11eb-9386-3d8785979309.png)
 
+# Secret
+- 시크릿 생성
+```
+kubectl create secret generic my-password --from-literal=password=mysqlpassword --namespace teamtwohotel
+```
+  > ![secret](https://user-images.githubusercontent.com/17754849/108868200-4f43f800-7639-11eb-8915-1999a695b85b.png)
+- 시크릿 확인
+```
+kubectl get secret my-password -o yaml
+```
+  > ![확인](https://user-images.githubusercontent.com/17754849/108868606-b8c40680-7639-11eb-8296-dfc2ad9cb4e0.png)
+- 시크릿 buildspec.yml
+  > ![소스](https://user-images.githubusercontent.com/17754849/108870840-dd20e280-763b-11eb-8e55-bfc9dc70e9e0.png)
+- 시크릿 자바 출력
+  > ![결과출력](https://user-images.githubusercontent.com/17754849/108871144-30933080-763c-11eb-8e76-453348bb7ec0.png)
 
 ## Spring 세팅 ( 소스 내려받아서 하는 경우 안해도 됨 )
 [spring.io](start.spring.io)  
