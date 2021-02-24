@@ -281,6 +281,18 @@ kubectl get secret my-password -o yaml
 - 시크릿 자바 출력
   > ![결과출력](https://user-images.githubusercontent.com/17754849/108871144-30933080-763c-11eb-8e76-453348bb7ec0.png)
 
+## hystrix 세팅
+https://jeong-pro.tistory.com/183 참고
+
+## pod에 siege 설치
+```
+kubectl run siege --image=apexacme/siege-nginx -n recruit
+
+접속
+kubectl exec -it siege -- /bin/bash
+
+```
+
 ## Spring 세팅 ( 소스 내려받아서 하는 경우 안해도 됨 )
 [spring.io](start.spring.io)  
 Dependencies : JPA, H2(java embeded DB), data rest(Rest Repositories)
