@@ -43,7 +43,7 @@ msaIntensive MSA 구성을 위한 내용 정리
     - https://www.44bits.io/ko/post/publishing_and_managing_aws_user_access_key
 7. eksctl 생성 ( 시간이 좀 걸림 )
     - 클러스터 생성
-        > `eksctl create cluster --name teamtwohotel --version 1.17 --nodegroup-name standard-workers --node-type t3.micro --nodes 4 --nodes-min 1 --nodes-max 4`
+        > `eksctl create cluster --name teamtwohotel --version 1.17 --nodegroup-name standard-workers --node-type t3.medium --nodes 4 --nodes-min 1 --nodes-max 4`
 8. Local EKS 클러스터 토큰가져오기 ( CI/CD 할때 필요한건데, 앞에 설정해줘야 할 게 더 있으니 아래 쪽 CI/CD 다시 참고 )
     > `aws eks --region ap-northeast-2 update-kubeconfig --name teamtwohotel`
 9. 아마존 컨테이너 레지스트리
