@@ -293,6 +293,15 @@ kubectl exec -it siege -- /bin/bash
 
 ```
 
+## pod 여러 개 띄우게 replica 설정
+- kubectl scale deploy qualification --replicas=1
+
+## 떠 있는 deploy의 이미지 변경
+- kubectl set image deploy qualification qualification=496278789073.dkr.ecr.ap-northeast-1.amazonaws.com/recruit-qualification:v2
+
+## Auto scaling HPA 설정
+- kubectl autoscale deployment payment --cpu-percent=50 --min=1 --max=10 cpu-percent=50 -n teamtwohotel
+
 ## Spring 세팅 ( 소스 내려받아서 하는 경우 안해도 됨 )
 [spring.io](start.spring.io)  
 Dependencies : JPA, H2(java embeded DB), data rest(Rest Repositories)
